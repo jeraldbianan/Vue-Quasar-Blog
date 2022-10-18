@@ -1,12 +1,16 @@
 import { RouteRecordRaw } from 'vue-router';
-import generatedRoutes from './auto-routing';
 
 const routes: RouteRecordRaw[] = [
-  ...generatedRoutes,
   {
     path: '/',
-    component: () => import('layouts/default.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
+    component: () => import('src/layouts/MainLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Home',
+        component: () => import('src/pages/HomePage.vue'),
+      },
+    ],
   },
 
   // Always leave this as last one,
