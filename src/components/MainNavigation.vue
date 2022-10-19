@@ -10,6 +10,9 @@
             ><i class="fa-solid fa-house fa-lg q-px-sm"></i>Home</router-link
           >
           <router-link class="link" to="#"
+            ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
+          >
+          <router-link class="link" to="#"
             ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
           >
           <router-link class="link" to="#"
@@ -36,6 +39,9 @@
         <ul class="mobile-nav" v-show="mobileNav">
           <router-link class="link" to="#"
             ><i class="fa-solid fa-house fa-lg q-px-sm"></i>Home</router-link
+          >
+          <router-link class="link" to="#"
+            ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
           >
           <router-link class="link" to="#"
             ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
@@ -168,7 +174,7 @@ export default {
 
   .mobile-nav-enter-active,
   .mobile-nav-leave-active {
-    transition: all 1s ease;
+    transition: all 0.5s ease;
   }
 
   .mobile-nav-enter-from,

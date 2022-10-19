@@ -68,6 +68,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgb(231, 231, 231);
     flex: 4;
     order: 2;
     @media (min-width: 700px) {
@@ -164,7 +165,7 @@ export default {
 
 .no-user:first-child {
   .blog-content {
-    background-color: #5f4c4c;
+    background-color: #6d6a6a;
     color: #fff;
   }
 }

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="left">
         <div class="col-1">
-          <router-link class="header" :to="{ name: 'Home' }">JBBlogs</router-link>
+          <router-link class="header" :to="{ name: 'Home' }">JB Blogs</router-link>
           <ul>
             <li>
               <a href="https://github.com/jeraldbianan?tab=repositories"
@@ -28,6 +28,9 @@
               ><i class="fa-solid fa-house fa-lg q-px-sm"></i>Home</router-link
             >
             <router-link class="link" to="#"
+              ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
+            >
+            <router-link class="link" to="#"
               ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
             >
             <router-link v-if="admin" class="link" to="#"
@@ -43,13 +46,21 @@
       </div>
       <div class="right">
         <p>Copyright 2022 All Rights Reserved</p>
+        <p>Created by: {{ author }}</p>
       </div>
     </div>
   </q-footer>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'MainFooter',
+  data() {
+    return {
+      author: 'Jerald Bianan',
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

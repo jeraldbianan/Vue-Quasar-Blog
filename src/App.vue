@@ -56,4 +56,13 @@ export default defineComponent({
     fill: #fff;
   }
 }
+
+.blog-card-wrapper {
+  position: relative;
+  padding: 80px 16px;
+  background-color: #acacac;
+  @media (min-width: 500px) {
+    padding: 100px 16px;
+  }
+}
 </style>
