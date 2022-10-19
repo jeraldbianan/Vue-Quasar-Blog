@@ -1,13 +1,11 @@
 <template>
   <q-layout view="hHh lpR fff">
     <div>
-      <MainNavigation />
+      <MainNavigation v-if="!navigation" />
     </div>
+    <router-view></router-view>
     <div>
-      <HomePage />
-    </div>
-    <div>
-      <MainFooter />
+      <MainFooter v-if="!navigation" />
     </div>
   </q-layout>
 </template>
@@ -15,14 +13,38 @@
 <script>
 import MainNavigation from '../components/MainNavigation.vue';
 import MainFooter from '../components/MainFooter.vue';
-import HomePage from '../pages/HomePage.vue';
 
 export default {
   name: 'MainLayout',
   components: {
     MainNavigation,
     MainFooter,
-    HomePage,
+  },
+  data() {
+    return {
+      navigation: null,
+    };
+  },
+  created() {
+    this.checkRoute();
+  },
+  methods: {
+    checkRoute() {
+      if (
+        this.$route.name === 'LoginPage' ||
+        this.$route.name === 'RegisterPage' ||
+        this.$route.name === 'ForgotPasswordPage'
+      ) {
+        this.navigation = true;
+        return;
+      }
+      this.navigation = false;
+    },
+  },
+  watch: {
+    $route() {
+      this.checkRoute();
+    },
   },
 };
 </script>

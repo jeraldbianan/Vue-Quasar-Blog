@@ -24,13 +24,13 @@
         </div>
         <div class="col-2">
           <ul>
-            <router-link class="link" to="#"
+            <router-link class="link" :to="{ name: 'Home' }"
               ><i class="fa-solid fa-house fa-lg q-px-sm"></i>Home</router-link
             >
             <router-link class="link" to="#"
               ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
             >
-            <router-link class="link" to="#"
+            <router-link class="link" :to="{ name: 'BlogsView' }"
               ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
             >
             <router-link v-if="admin" class="link" to="#"

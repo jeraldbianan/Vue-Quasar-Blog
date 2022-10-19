@@ -15,6 +15,21 @@ const routes: RouteRecordRaw[] = [
         name: 'BlogsView',
         component: () => import('src/pages/BlogsView.vue'),
       },
+      {
+        path: '/LoginPage',
+        name: 'LoginPage',
+        component: () => import('src/pages/LoginPage.vue'),
+      },
+      {
+        path: '/RegisterPage',
+        name: 'RegisterPage',
+        component: () => import('src/pages/RegisterPage.vue'),
+      },
+      {
+        path: '/ForgotPasswordPage',
+        name: 'ForgotPasswordPage',
+        component: () => import('src/pages/ForgotPasswordPage.vue'),
+      },
     ],
   },
 

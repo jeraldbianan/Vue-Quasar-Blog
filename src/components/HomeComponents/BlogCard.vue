@@ -1,32 +1,40 @@
 <template>
-  <div class="blog-card">
+  <q-card class="blog-card">
     <img :src="require(`../../assets/blogCards/${post.blogCoverPhoto}.jpg`)" alt="" />
     <div class="info q-pb-md">
-      <h4>{{ post.blogTitle }}</h4>
-      <h6 class="q-py-sm">Posted on: {{ post.blogDate }}</h6>
+      <q-card-section>
+        <h4>{{ post.blogTitle }}</h4>
+        <h6 class="q-py-sm">Posted on: {{ post.blogDate }}</h6>
+      </q-card-section>
 
-      <div class="icons">
-        <div class="icon">
-          <q-btn
-            class="edit fa-2x"
-            flat
-            dense
-            round
-            icon="fa-solid fa-pen-to-square"
-            aria-label="Menu"
-          />
+      <transition
+        appear
+        enter-active-class="animated fadeIn slow"
+        leave-active-class="animated fadeOut slow"
+      >
+        <div class="icons" v-show="editPost">
+          <div class="icon" name="icons">
+            <q-btn
+              class="edit fa-2x"
+              flat
+              dense
+              round
+              icon="fa-solid fa-pen-to-square"
+              aria-label="Menu"
+            />
+          </div>
+          <div class="icon" name="icons">
+            <q-btn
+              class="delete fa-2x"
+              flat
+              dense
+              round
+              icon="fa-solid fa-trash"
+              aria-label="Menu"
+            />
+          </div>
         </div>
-        <div class="icon">
-          <q-btn
-            class="delete fa-2x"
-            flat
-            dense
-            round
-            icon="fa-solid fa-trash"
-            aria-label="Menu"
-          />
-        </div>
-      </div>
+      </transition>
 
       <q-btn
         class="link q-py-sm"
@@ -38,13 +46,18 @@
         <span class="q-px-md">View the Post</span>
       </q-btn>
     </div>
-  </div>
+  </q-card>
 </template>
 
 <script>
 export default {
   name: 'blogCard',
   props: ['post'],
+  computed: {
+    editPost() {
+      return this.$store.state.editPost;
+    },
+  },
 };
 </script>
 

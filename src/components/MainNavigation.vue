@@ -6,13 +6,13 @@
       </div>
       <div class="nav-links">
         <ul v-show="!mobile">
-          <router-link class="link" to="#"
+          <router-link class="link" :to="{ name: 'Home' }"
             ><i class="fa-solid fa-house fa-lg q-px-sm"></i>Home</router-link
           >
           <router-link class="link" to="#"
             ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
           >
-          <router-link class="link" to="#"
+          <router-link class="link" :to="{ name: 'BlogsView' }"
             ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
           >
           <router-link class="link" to="#"
@@ -37,13 +37,13 @@
       />
       <transition name="mobile-nav">
         <ul class="mobile-nav" v-show="mobileNav">
-          <router-link class="link" to="#"
+          <router-link class="link" :to="{ name: 'Home' }"
             ><i class="fa-solid fa-house fa-lg q-px-sm"></i>Home</router-link
           >
           <router-link class="link" to="#"
             ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
           >
-          <router-link class="link" to="#"
+          <router-link class="link" :to="{ name: 'BlogsView' }"
             ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
           >
           <router-link class="link" to="#"

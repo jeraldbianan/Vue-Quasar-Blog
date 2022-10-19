@@ -24,10 +24,15 @@ export default createStore({
         blogDate: 'August 1, 2022',
       },
     ],
+    editPost: false,
   },
   getters: {
   },
   mutations: {
+    toggleEditPost(state, payload) {
+      state.editPost = payload
+      console.log(state.editPost)
+    }
   },
   actions: {
   },

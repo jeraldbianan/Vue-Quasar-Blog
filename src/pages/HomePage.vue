@@ -1,33 +1,39 @@
 <template>
   <q-page-container>
     <div class="home">
-      <div class="blog-card-wrapper">
-        <div class="container">
-          <h3>View More Recent Blogs</h3>
-          <div class="blog-cards">
-            <BlogCards
-              v-for="(post, index) in sampleBlogCards"
-              :key="index"
-              :post="post"
-            />
-          </div>
-        </div>
-      </div>
       <BlogPost :post="welcomeScreen" />
       <BlogPost v-for="(post, index) in sampleBlogPost" :key="index" :post="post" />
+      <transition
+        appear
+        enter-active-class="animated fadeIn slow"
+        leave-active-class="animated fadeOut slow"
+      >
+        <div class="blog-card-wrapper">
+          <div class="container">
+            <h3>View More Recent Blogs</h3>
+            <div class="blog-cards">
+              <BlogCard
+                v-for="(post, index) in sampleBlogCards"
+                :key="index"
+                :post="post"
+              />
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
   </q-page-container>
 </template>
 
 <script>
 import BlogPost from '../components/HomeComponents/BlogPost.vue';
-import BlogCards from '../components/HomeComponents/BlogCard.vue';
+import BlogCard from '../components/HomeComponents/BlogCard.vue';
 import DummyData from '../assets/dummyData/dummyData.js';
 export default {
   name: 'HomePage',
   components: {
     BlogPost,
-    BlogCards,
+    BlogCard,
   },
   data() {
     return {

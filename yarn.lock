@@ -7540,7 +7540,7 @@ qs@6.9.3:
 
 quasar-app-extension-auto-routing@^0.0.31:
   version "0.0.31"
-  resolved "https://registry.npmjs.org/quasar-app-extension-auto-routing/-/quasar-app-extension-auto-routing-0.0.31.tgz"
+  resolved "https://registry.yarnpkg.com/quasar-app-extension-auto-routing/-/quasar-app-extension-auto-routing-0.0.31.tgz#7992a79e207f20560f533b698e19863960120407"
   integrity sha512-dWrNMwKtdjNbxT7DiW4iO6fsabewYjd7WJ6PRTZ6bbo9bMcO9KTKv3cYTtNsICbrkfvtERzaUt1LMOEecYo8xA==
   dependencies:
     chokidar "^3.5.3"
