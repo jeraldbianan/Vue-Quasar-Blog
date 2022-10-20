@@ -18,7 +18,7 @@
           <router-link class="link" to="#"
             ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create Post</router-link
           >
-          <router-link class="link" to="#"
+          <router-link class="link" :to="{ name: 'LoginPage' }"
             ><i class="fa-solid fa-right-to-bracket fa-lg q-px-sm"></i>Login In /
             Register</router-link
           >
@@ -49,7 +49,7 @@
           <router-link class="link" to="#"
             ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create Post</router-link
           >
-          <router-link class="link" to="#"
+          <router-link class="link" :to="{ name: 'LoginPage' }"
             ><i class="fa-solid fa-right-to-bracket fa-lg q-px-sm"></i>Login In /
             Register</router-link
           >
