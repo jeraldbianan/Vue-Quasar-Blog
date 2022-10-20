@@ -2,7 +2,7 @@
 
 
 # Frameworks/Tools I used
-- VUE3 + Quasar + vuex + Firebase
+- VUE3(Composition API) + Quasar + vuex + Firebase
 
 # What to do before use
 - yarn install

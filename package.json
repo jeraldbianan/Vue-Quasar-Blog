@@ -35,9 +35,12 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.5",
     "vue": "^3.2.37",
+    "vue-password-strength-meter": "^1.7.2",
     "vue-router": "^4.0.16",
+    "vue-simple-password-meter": "^0.1.0",
     "vue-svg-loader": "^0.16.0",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.2.6",

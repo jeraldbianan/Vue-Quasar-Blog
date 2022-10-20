@@ -1,8 +1,9 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 const firebaseConfig = {
-  apiKey: 'IzaSyBjsBqbT5NAnsjLIFCrb9ODn8ChNWZLU-A',
+  apiKey: 'AIzaSyBjsBqbT5NAnsjLIFCrb9ODn8ChNWZLU-A',
   authDomain: 'jbblogs-159a4.firebaseapp.com',
   projectId: 'jbblogs-159a4',
   storageBucket: 'jbblogs-159a4.appspot.com',

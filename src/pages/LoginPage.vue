@@ -65,17 +65,16 @@ import { ref } from 'vue';
 
 export default {
   name: 'LoginPage',
-  data() {
-    return {
-      email: null,
-      password: null,
-    };
-  },
 
   setup() {
+    const email = ref(null);
+    const password = ref(null);
+
     return {
       slide: ref(1),
       autoplay: ref(true),
+      email,
+      password,
     };
   },
 };
