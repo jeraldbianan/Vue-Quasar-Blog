@@ -30,7 +30,7 @@
             >Forgot your Password?</router-link
           >
 
-          <q-btn class="q-px-md" unelevated rounded color="dark" label="Sign in" />
+          <q-btn class="button" unelevated rounded color="dark" label="Sign in" />
 
           <router-link class="home" :to="{ name: 'Home' }">Home</router-link>
 
@@ -64,6 +64,7 @@
 import { ref } from 'vue';
 
 export default {
+  name: 'LoginPage',
   data() {
     return {
       email: null,
@@ -144,6 +145,10 @@ export default {
       &:hover {
         border-color: #303030;
       }
+    }
+
+    .button {
+      width: 200px;
     }
 
     .home {
