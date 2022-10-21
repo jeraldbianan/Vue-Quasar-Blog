@@ -84,7 +84,7 @@ export default defineComponent({
 
 .error {
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   color: red;
 }
 </style>

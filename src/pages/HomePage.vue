@@ -1,28 +1,34 @@
 <template>
-  <q-page-container>
-    <div class="home">
-      <BlogPost :post="welcomeScreen" />
-      <BlogPost v-for="(post, index) in sampleBlogPost" :key="index" :post="post" />
-      <transition
-        appear
-        enter-active-class="animated fadeIn slow"
-        leave-active-class="animated fadeOut slow"
-      >
-        <div class="blog-card-wrapper">
-          <div class="container">
-            <h3>View More Recent Blogs</h3>
-            <div class="blog-cards">
-              <BlogCard
-                v-for="(post, index) in sampleBlogCards"
-                :key="index"
-                :post="post"
-              />
+  <transition
+    appear
+    enter-active-class="animated fadeIn slow"
+    leave-active-class="animated fadeOut slow"
+  >
+    <q-page-container>
+      <div class="home">
+        <BlogPost :post="welcomeScreen" />
+        <BlogPost v-for="(post, index) in sampleBlogPost" :key="index" :post="post" />
+        <transition
+          appear
+          enter-active-class="animated fadeIn slow"
+          leave-active-class="animated fadeOut slow"
+        >
+          <div class="blog-card-wrapper">
+            <div class="container">
+              <h3>View More Recent Blogs</h3>
+              <div class="blog-cards">
+                <BlogCard
+                  v-for="(post, index) in sampleBlogCards"
+                  :key="index"
+                  :post="post"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </transition>
-    </div>
-  </q-page-container>
+        </transition>
+      </div>
+    </q-page-container>
+  </transition>
 </template>
 
 <script>

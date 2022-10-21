@@ -118,10 +118,10 @@
             @mouseenter="autoplay = false"
             @mouseleave="autoplay = true"
           >
-            <q-carousel-slide :name="1" img-src="../assets/carousel/carousel1.jpg" />
-            <q-carousel-slide :name="2" img-src="../assets/carousel/carousel2.jpg" />
-            <q-carousel-slide :name="3" img-src="../assets/carousel/carousel3.jpg" />
-            <q-carousel-slide :name="4" img-src="../assets/carousel/carousel4.jpg" />
+            <q-carousel-slide :name="1" img-src="../assets/carousel/carousel2.jpg" />
+            <q-carousel-slide :name="2" img-src="../assets/carousel/carousel1.jpg" />
+            <q-carousel-slide :name="3" img-src="../assets/carousel/carousel4.jpg" />
+            <q-carousel-slide :name="4" img-src="../assets/carousel/carousel3.jpg" />
           </q-carousel>
         </div>
       </div>
@@ -130,17 +130,20 @@
 </template>
 
 <script>
-import { onUpdated, ref } from 'vue';
+import { ref, onBeforeUnmount } from 'vue';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import db from '../firebase/firebaseInit';
 import { useRouter } from 'vue-router';
+import { useQuasar, QSpinnerGears } from 'quasar';
 
 export default {
   name: 'RegisterPage',
   components: {},
 
   setup() {
+    const $q = useQuasar();
+    let timer;
     const firstName = ref('');
     const lastName = ref('');
     const username = ref('');
@@ -152,15 +155,17 @@ export default {
     const firebaseError = ref(null);
     const inputRef = ref(null);
 
+    onBeforeUnmount(() => {
+      if (timer !== void 0) {
+        clearTimeout(timer);
+        $q.loading.hide();
+      }
+    });
+
     function isValidEmail(val) {
       const emailPattern = /^(?=[a-zA-Z0-9@._%+-]{6,254}$)[a-zA-Z0-9._%+-]{1,64}@(?:[a-zA-Z0-9-]{1,63}\.){1,8}[a-zA-Z]{2,63}$/;
       return emailPattern.test(val) || 'Invalid email';
     }
-
-    onUpdated(() => {
-      console.log(error.value);
-      console.log(firebaseError.value);
-    });
 
     async function register() {
       try {
@@ -171,6 +176,15 @@ export default {
           email.value !== '' &&
           password.value !== ''
         ) {
+          $q.loading.show({
+            message: 'Processing Please Wait....',
+          });
+
+          timer = setTimeout(() => {
+            $q.loading.hide();
+            timer = void 0;
+          }, 2000);
+
           error.value = false;
           errorMsg.value = '';
           const firebaseAuth = await firebase.auth();
@@ -186,9 +200,22 @@ export default {
             username: username.value,
             email: email.value,
           });
-          router.push({ name: 'Home' });
-          return;
+          router.push({ name: 'LoginPage' });
+          return setTimeout(() => {
+            $q.loading.show({
+              spinner: QSpinnerGears,
+              spinnerColor: 'blue',
+              messageColor: 'white',
+              message: 'Account has been Successfully Registered',
+            });
+
+            setTimeout(() => {
+              $q.loading.hide();
+              timer = void 0;
+            }, 2000);
+          }, 2000);
         }
+
         error.value = true;
         errorMsg.value = 'Please fill out all the fields';
         setTimeout(() => (error.value = false), 5000);
