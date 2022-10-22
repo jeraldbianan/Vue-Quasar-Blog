@@ -34,7 +34,7 @@
 <script>
 import BlogPost from '../components/HomeComponents/BlogPost.vue';
 import BlogCard from '../components/HomeComponents/BlogCard.vue';
-import DummyData from '../assets/dummyData/dummyData.js';
+import DummyData from '../assets/dummydata/dummyData';
 export default {
   name: 'HomePage',
   components: {

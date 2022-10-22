@@ -31,7 +31,6 @@ export default createStore({
   mutations: {
     toggleEditPost(state, payload) {
       state.editPost = payload
-      console.log(state.editPost)
     }
   },
   actions: {

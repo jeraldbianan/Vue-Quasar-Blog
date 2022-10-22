@@ -6,7 +6,6 @@
       leave-active-class="animated fadeOut slow"
     >
       <div class="reset-password">
-        <Modal v-if="modalActive" v-on:close-modal="closeModal" />
         <div class="form-wrap">
           <form action="" class="reset">
             <h2>Reset Password</h2>
@@ -27,6 +26,38 @@
               color="dark"
               label="Reset"
             />
+
+            <q-dialog v-model="modalSuccess">
+              <q-card style="width: 300px">
+                <q-card-section>
+                  <div class="text-h6">Password Reset</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                  Your Password has been successfully reset
+                </q-card-section>
+
+                <q-card-actions align="right" class="bg-white text-teal">
+                  <q-btn flat label="OK" v-close-popup />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
+
+            <q-dialog v-model="modalFailed">
+              <q-card style="width: 300px">
+                <q-card-section>
+                  <div class="text-h6">Password Reset</div>
+                </q-card-section>
+
+                <q-card-section class="q-pt-none">
+                  <div v-if="error" class="error q-mt-md">{{ errorMsg }}</div>
+                </q-card-section>
+
+                <q-card-actions align="right" class="bg-white text-teal">
+                  <q-btn flat label="OK" v-close-popup />
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
 
             <router-link class="links q-pt-lg" :to="{ name: 'LoginPage' }"
               >Login</router-link
@@ -62,37 +93,23 @@
 </template>
 
 <script>
-import Modal from '../components/ResetPasswordModal.vue';
 import { useQuasar } from 'quasar';
 import { ref, onBeforeUnmount } from 'vue';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 export default {
   name: 'ForgotPasswordPage',
-  components: {
-    Modal,
-  },
+  components: {},
 
   setup() {
     const $q = useQuasar();
     let timer;
     const email = ref(null);
-    const modalActive = ref(null);
-    const modalMessage = ref('');
-
-    function closeModal() {
-      modalActive.value = !modalActive.value;
-      email.value = '';
-    }
-
-    function resetPassword() {
-      $q.loading.show();
-
-      // hiding in 2s
-      timer = setTimeout(() => {
-        $q.loading.hide();
-        timer = void 0;
-      }, 2000);
-    }
+    const modalSuccess = ref(null);
+    const modalFailed = ref(null);
+    const errorMsg = ref('');
+    const error = ref(null);
 
     onBeforeUnmount(() => {
       if (timer !== void 0) {
@@ -101,12 +118,47 @@ export default {
       }
     });
 
+    function resetPassword() {
+      $q.loading.show();
+
+      timer = setTimeout(() => {
+        $q.loading.hide();
+        timer = void 0;
+      }, 1000);
+
+      if (email.value !== '') {
+        firebase
+          .auth()
+          .sendPasswordResetEmail(email.value)
+          .then(() => {
+            error.value = false;
+            email.value = '';
+            modalSuccess.value = true;
+            modalFailed.value = false;
+          })
+          .catch((err) => {
+            errorMsg.value = err.message;
+            error.value = true;
+            modalSuccess.value = false;
+            modalFailed.value = true;
+          });
+      } else {
+        errorMsg.value = 'Please enter the Email Address';
+        error.value = true;
+        modalSuccess.value = false;
+        modalFailed.value = true;
+      }
+    }
+
     return {
       slide: ref(1),
       autoplay: ref(true),
-      closeModal,
-      modalMessage,
       resetPassword,
+      email,
+      modalSuccess,
+      modalFailed,
+      errorMsg,
+      error,
     };
   },
 };
@@ -142,6 +194,7 @@ export default {
 
     p {
       margin-bottom: 40px;
+      text-align: center;
     }
 
     h2 {

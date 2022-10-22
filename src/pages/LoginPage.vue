@@ -25,12 +25,20 @@
                 ><template v-slot:prepend><q-icon name="fa-solid fa-lock" /></template
               ></q-input>
             </div>
+            <div v-if="error" class="error q-mt-md">{{ errorMsg }}</div>
           </div>
           <router-link class="forgot-password" :to="{ name: 'ForgotPasswordPage' }"
             >Forgot your Password?</router-link
           >
 
-          <q-btn class="button" unelevated rounded color="dark" label="Sign in" />
+          <q-btn
+            @click.prevent="signIn"
+            class="button"
+            unelevated
+            rounded
+            color="dark"
+            label="Sign in"
+          />
 
           <router-link class="home" :to="{ name: 'Home' }">Home</router-link>
 
@@ -61,20 +69,65 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onBeforeUnmount } from 'vue';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
 
 export default {
   name: 'LoginPage',
 
   setup() {
+    const $q = useQuasar();
+    let timer;
     const email = ref(null);
     const password = ref(null);
+    const error = ref(null);
+    const errorMsg = ref('');
+    const router = useRouter();
+
+    onBeforeUnmount(() => {
+      if (timer !== void 0) {
+        clearTimeout(timer);
+        $q.loading.hide();
+      }
+    });
+
+    function signIn() {
+      $q.loading.show({
+        message: 'Processing Please Wait....',
+      });
+
+      timer = setTimeout(() => {
+        $q.loading.hide();
+        timer = void 0;
+      }, 2000);
+
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email.value, password.value)
+        .then(() => {
+          router.push({ name: 'Home' });
+          error.value = false;
+          errorMsg.value = '';
+          console.log(firebase.auth().currentUser.uid);
+        })
+        .catch((err) => {
+          error.value = true;
+          errorMsg.value = err.message;
+        });
+    }
 
     return {
       slide: ref(1),
       autoplay: ref(true),
       email,
       password,
+      error,
+      errorMsg,
+      router,
+      signIn,
     };
   },
 };

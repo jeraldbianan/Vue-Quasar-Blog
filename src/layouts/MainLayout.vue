@@ -13,6 +13,11 @@
 <script>
 import MainNavigation from '../components/MainNavigation.vue';
 import MainFooter from '../components/MainFooter.vue';
+import { onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import db from '../firebase/firebaseInit';
 
 export default {
   name: 'MainLayout',
@@ -20,31 +25,41 @@ export default {
     MainNavigation,
     MainFooter,
   },
-  data() {
-    return {
-      navigation: null,
-    };
-  },
-  created() {
-    this.checkRoute();
-  },
-  methods: {
-    checkRoute() {
+
+  setup() {
+    const navigation = ref(null);
+    const route = useRoute();
+
+    console.log(firebase.auth().currentUser);
+
+    watch(route, () => {
       if (
-        this.$route.name === 'LoginPage' ||
-        this.$route.name === 'RegisterPage' ||
-        this.$route.name === 'ForgotPasswordPage'
+        route.name === 'LoginPage' ||
+        route.name === 'RegisterPage' ||
+        route.name === 'ForgotPasswordPage'
       ) {
-        this.navigation = true;
-        return;
+        navigation.value = true;
+      } else {
+        navigation.value = false;
       }
-      this.navigation = false;
-    },
-  },
-  watch: {
-    $route() {
-      this.checkRoute();
-    },
+    });
+
+    onMounted(() => {
+      if (
+        route.name === 'LoginPage' ||
+        route.name === 'RegisterPage' ||
+        route.name === 'ForgotPasswordPage'
+      ) {
+        navigation.value = true;
+      } else {
+        navigation.value = false;
+      }
+    });
+
+    return {
+      route,
+      navigation,
+    };
   },
 };
 </script>

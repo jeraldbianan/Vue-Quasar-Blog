@@ -33,11 +33,11 @@
             <router-link class="link" :to="{ name: 'BlogsView' }"
               ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
             >
-            <router-link v-if="admin" class="link" to="#"
+            <router-link class="link" to="#"
               ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create
               Post</router-link
             >
-            <router-link v-if="!user" class="link" to="#"
+            <router-link class="link" to="#"
               ><i class="fa-solid fa-right-to-bracket fa-lg q-px-sm"></i>Login In /
               Register</router-link
             >

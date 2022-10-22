@@ -87,7 +87,7 @@
               enter-active-class="animated fadeIn slow"
               leave-active-class="animated fadeOut slow"
             >
-              <div v-if="error" class="error">{{ errorMsg }}</div>
+              <div v-if="error" class="error q-mt-md">{{ errorMsg }}</div>
               <div v-if="firebaseError" class="error">{{ firebaseError }}</div>
             </transition-group>
           </div>
