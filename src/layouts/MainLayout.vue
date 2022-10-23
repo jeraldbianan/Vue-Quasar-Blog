@@ -18,6 +18,7 @@ import { useRoute } from 'vue-router';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import db from '../firebase/firebaseInit';
+import { useStore } from 'vuex';
 
 export default {
   name: 'MainLayout',
@@ -29,8 +30,15 @@ export default {
   setup() {
     const navigation = ref(null);
     const route = useRoute();
+    const store = useStore();
 
-    console.log(firebase.auth().currentUser);
+    firebase.auth().onAuthStateChanged((user) => {
+      store.commit('updateUser', user);
+      if (user) {
+        store.dispatch('getCurrentUser');
+        console.log(store.state.profileEmail);
+      }
+    });
 
     watch(route, () => {
       if (
