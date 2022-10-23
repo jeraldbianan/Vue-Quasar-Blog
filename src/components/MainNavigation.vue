@@ -25,6 +25,9 @@
             Register</router-link
           >
         </ul>
+        <div class="profile" ref="profile">
+          <span>{{}}</span>
+        </div>
       </div>
       <q-btn
         @click="toggleMobileNav"
@@ -62,36 +65,79 @@
 </template>
 
 <script>
+import { ref, watchEffect } from 'vue';
+import { useStore } from 'vuex';
 export default {
   name: 'MainNavigation',
   components: {},
-  data() {
+
+  setup() {
+    const mobile = ref(null);
+    const mobileNav = ref(null);
+    const windowWidth = ref(null);
+    const store = useStore();
+
+    watchEffect(() => {
+      window.addEventListener('resize', checkSCreen);
+      windowWidth.value = window.innerWidth;
+      if (windowWidth.value <= 750) {
+        mobile.value = true;
+      } else {
+        mobile.value = false;
+        mobileNav.value = false;
+      }
+    });
+
+    function checkSCreen() {
+      windowWidth.value = window.innerWidth;
+      if (windowWidth.value <= 750) {
+        mobile.value = true;
+      } else {
+        mobile.value = false;
+        mobileNav.value = false;
+      }
+    }
+
+    function toggleMobileNav() {
+      mobileNav.value = !mobileNav.value;
+    }
+
     return {
-      mobile: null,
-      mobileNav: null,
-      windowWidth: null,
+      mobile,
+      mobileNav,
+      toggleMobileNav,
+      checkSCreen,
+      store,
     };
   },
-  created() {
-    window.addEventListener('resize', this.checkSCreen);
-    this.checkSCreen();
-  },
-  methods: {
-    checkSCreen() {
-      this.windowWidth = window.innerWidth;
-      if (this.windowWidth <= 750) {
-        this.mobile = true;
-        return;
-      }
-      this.mobile = false;
-      this.mobileNav = false;
-      return;
-    },
-    toggleMobileNav() {
-      this.mobileNav = !this.mobileNav;
-    },
-  },
 };
+
+// data() {
+//   return {
+//     mobile: null,
+//     mobileNav: null,
+//     windowWidth: null,
+//   };
+// },
+// created() {
+//   window.addEventListener('resize', this.checkSCreen);
+//   this.checkSCreen();
+// },
+// methods: {
+//   checkSCreen() {
+//     this.windowWidth = window.innerWidth;
+//     if (this.windowWidth <= 750) {
+//       this.mobile = true;
+//       return;
+//     }
+//     this.mobile = false;
+//     this.mobileNav = false;
+//     return;
+//   },
+//   toggleMobileNav() {
+//     this.mobileNav = !this.mobileNav;
+//   },
+// },
 </script>
 
 <style lang="scss" scoped>
@@ -121,7 +167,7 @@ export default {
 
       .header {
         font-family: 'Proxima Nova';
-        font-weight: 700;
+        font-weight: 600;
         font-size: 35px;
         color: #000;
         text-decoration: none;
@@ -129,6 +175,7 @@ export default {
         .header-span {
           font-family: 'Comfortaa', Courier, monospace;
           font-size: 20px;
+          font-weight: 600;
         }
       }
     }

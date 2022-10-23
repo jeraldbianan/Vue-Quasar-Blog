@@ -111,6 +111,7 @@ footer {
         .header-span {
           font-family: 'Comfortaa', Courier, monospace;
           font-size: 20px;
+          font-weight: 600;
         }
       }
       ul {

@@ -17,7 +17,6 @@ import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import db from '../firebase/firebaseInit';
 import { useStore } from 'vuex';
 
 export default {
