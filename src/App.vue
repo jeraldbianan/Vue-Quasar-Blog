@@ -10,6 +10,7 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import url('http://fonts.cdnfonts.com/css/proxima-nova-2');
 
 * {
   margin: 0;

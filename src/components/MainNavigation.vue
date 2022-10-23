@@ -2,7 +2,9 @@
   <q-header class="main-header">
     <nav class="container">
       <div class="branding">
-        <router-link class="header" :to="{ name: 'Home' }">JB BLOGS</router-link>
+        <router-link class="header" :to="{ name: 'Home' }"
+          >JB <span class="header-span">BLOGS</span></router-link
+        >
       </div>
       <div class="nav-links">
         <ul v-show="!mobile">
@@ -118,10 +120,16 @@ export default {
       align-items: center;
 
       .header {
-        font-weight: 600;
-        font-size: 24px;
+        font-family: 'Proxima Nova';
+        font-weight: 700;
+        font-size: 35px;
         color: #000;
         text-decoration: none;
+
+        .header-span {
+          font-family: 'Comfortaa', Courier, monospace;
+          font-size: 20px;
+        }
       }
     }
 

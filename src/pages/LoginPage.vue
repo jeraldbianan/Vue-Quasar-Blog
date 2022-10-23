@@ -104,19 +104,24 @@ export default {
         timer = void 0;
       }, 2000);
 
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email.value, password.value)
-        .then(() => {
-          router.push({ name: 'Home' });
-          error.value = false;
-          errorMsg.value = '';
-          console.log(firebase.auth().currentUser.uid);
-        })
-        .catch((err) => {
-          error.value = true;
-          errorMsg.value = err.message;
-        });
+      if (email.value !== '' && password.value !== '') {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(email.value, password.value)
+          .then(() => {
+            router.push({ name: 'Home' });
+            error.value = false;
+            errorMsg.value = '';
+            console.log(firebase.auth().currentUser.uid);
+          })
+          .catch((err) => {
+            error.value = true;
+            errorMsg.value = err.message;
+          });
+      } else {
+        errorMsg.value = 'Please enter your email and password to login';
+        error.value = true;
+      }
     }
 
     return {

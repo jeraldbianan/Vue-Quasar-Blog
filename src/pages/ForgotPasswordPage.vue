@@ -34,7 +34,7 @@
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
-                  Your Password has been successfully reset
+                  Your Password has been successfully reset, Please check your email.
                 </q-card-section>
 
                 <q-card-actions align="right" class="bg-white text-teal">

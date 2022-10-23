@@ -3,7 +3,9 @@
     <div class="container">
       <div class="left">
         <div class="col-1">
-          <router-link class="header" :to="{ name: 'Home' }">JB Blogs</router-link>
+          <router-link class="header" :to="{ name: 'Home' }"
+            >JB <span class="header-span">BLOGS</span></router-link
+          >
           <ul>
             <li>
               <a href="https://github.com/jeraldbianan?tab=repositories"
@@ -95,14 +97,20 @@ footer {
       }
 
       .header {
+        font-family: 'Proxima Nova';
         text-align: center;
-        font-size: 24px;
+        font-size: 35px;
         color: #fff;
         margin-bottom: 16px;
         text-decoration: none;
         font-weight: 600;
         @media (min-width: 800px) {
           text-align: initial;
+        }
+
+        .header-span {
+          font-family: 'Comfortaa', Courier, monospace;
+          font-size: 20px;
         }
       }
       ul {
