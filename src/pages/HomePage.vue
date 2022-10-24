@@ -6,7 +6,7 @@
   >
     <q-page-container>
       <div class="home">
-        <BlogPost :post="welcomeScreen" />
+        <BlogPost v-if="!user" :post="welcomeScreen" />
         <BlogPost v-for="(post, index) in sampleBlogPost" :key="index" :post="post" />
         <transition
           appear

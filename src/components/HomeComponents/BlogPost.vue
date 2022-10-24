@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-wrapper no-user">
+  <div class="blog-wrapper" :class="{ 'no-user': !user }">
     <div class="blog-content">
       <div>
         <h2 v-if="post.welcomeScreen">{{ post.title }}</h2>
@@ -46,10 +46,24 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+import { computed } from 'vue';
 export default {
   name: 'BlogPost',
   props: ['post'],
   components: {},
+
+  setup() {
+    const store = useStore();
+
+    const user = computed(() => {
+      return store.state.user;
+    });
+
+    return {
+      user,
+    };
+  },
 };
 </script>
 
