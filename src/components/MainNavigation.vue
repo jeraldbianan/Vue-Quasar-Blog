@@ -1,6 +1,6 @@
 <template>
   <q-header class="main-header">
-    <nav class="container">
+    <nav @click="hideOnClick" class="container">
       <div class="branding">
         <router-link class="header" :to="{ name: 'Home' }"
           >JB <span class="header-span">BLOGS</span></router-link
@@ -20,14 +20,55 @@
           <router-link class="link" to="#"
             ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create Post</router-link
           >
-          <router-link class="link" :to="{ name: 'LoginPage' }"
+          <router-link v-if="!user" class="link" :to="{ name: 'LoginPage' }"
             ><i class="fa-solid fa-right-to-bracket fa-lg q-px-sm"></i>Login In /
             Register</router-link
           >
         </ul>
-        <div class="profile" ref="profile">
-          <span>{{}}</span>
-        </div>
+        <q-btn-dropdown v-if="user" class="profile" color="dark">
+          <div class="row no-wrap q-pa-md">
+            <div class="column">
+              <div class="text-h6 q-mb-md">Account Settings</div>
+
+              <div class="option">
+                <router-link class="option" to="#">
+                  <i class="fa-solid fa-user fa-2x"></i>
+                  <p>Profile</p>
+                </router-link>
+              </div>
+              <div class="option">
+                <router-link class="option" to="#">
+                  <i class="fa-solid fa-lock fa-2x"></i>
+                  <p>Admin</p>
+                </router-link>
+              </div>
+            </div>
+
+            <q-separator vertical inset class="q-mx-lg" />
+
+            <div class="column items-center">
+              <q-avatar size="72px">
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              </q-avatar>
+
+              <div class="text-subtitle1 q-mb-xs">
+                {{ store.state.profileFirstName }} {{ store.state.profileLastName }}
+              </div>
+              <div class="text-subtitle1 q-mb-sm">
+                {{ store.state.profileEmail }}
+              </div>
+
+              <q-btn
+                @click="signOut"
+                color="dark"
+                label="Logout"
+                push
+                size="sm"
+                v-close-popup
+              />
+            </div>
+          </div>
+        </q-btn-dropdown>
       </div>
       <q-btn
         @click="toggleMobileNav"
@@ -54,7 +95,7 @@
           <router-link class="link" to="#"
             ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create Post</router-link
           >
-          <router-link class="link" :to="{ name: 'LoginPage' }"
+          <router-link v-if="!user" class="link" :to="{ name: 'LoginPage' }"
             ><i class="fa-solid fa-right-to-bracket fa-lg q-px-sm"></i>Login In /
             Register</router-link
           >
@@ -65,8 +106,11 @@
 </template>
 
 <script>
-import { ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+
 export default {
   name: 'MainNavigation',
   components: {},
@@ -76,6 +120,8 @@ export default {
     const mobileNav = ref(null);
     const windowWidth = ref(null);
     const store = useStore();
+    const profileMenu = ref(null);
+    const profile = ref(null);
 
     watchEffect(() => {
       window.addEventListener('resize', checkSCreen);
@@ -102,12 +148,25 @@ export default {
       mobileNav.value = !mobileNav.value;
     }
 
+    function signOut() {
+      firebase.auth().signOut();
+      window.location.reload();
+    }
+
+    const user = computed(() => {
+      return store.state.user;
+    });
+
     return {
       mobile,
       mobileNav,
       toggleMobileNav,
       checkSCreen,
       store,
+      profileMenu,
+      profile,
+      signOut,
+      user,
     };
   },
 };
@@ -197,6 +256,19 @@ export default {
           margin-right: 0;
         }
       }
+
+      .profile {
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: #fff;
+        background-color: #303030;
+      }
     }
   }
 
@@ -235,6 +307,19 @@ export default {
   .mobile-nav-enter-from,
   .mobile-nav-leave-to {
     transform: translateX(-250px);
+  }
+}
+
+.option {
+  text-decoration: none;
+  color: #303030;
+  display: flex;
+  height: 50px;
+
+  p {
+    font-size: 14px;
+    margin-left: 12px;
+    align-items: center;
   }
 }
 </style>

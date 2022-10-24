@@ -35,21 +35,32 @@
 import BlogPost from '../components/HomeComponents/BlogPost.vue';
 import BlogCard from '../components/HomeComponents/BlogCard.vue';
 import DummyData from '../assets/dummydata/dummyData';
+import { useStore } from 'vuex';
+import { computed } from 'vue';
+
 export default {
   name: 'HomePage',
   components: {
     BlogPost,
     BlogCard,
   },
-  data() {
+
+  setup() {
+    const store = useStore();
+
+    const sampleBlogCards = computed(() => {
+      return store.state.sampleBlogCards;
+    });
+
+    const user = computed(() => {
+      return store.state.user;
+    });
+
     return {
+      user,
+      sampleBlogCards,
       ...DummyData,
     };
-  },
-  computed: {
-    sampleBlogCards() {
-      return this.$store.state.sampleBlogCards;
-    },
   },
 };
 </script>

@@ -39,7 +39,7 @@
               ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create
               Post</router-link
             >
-            <router-link class="link" to="#"
+            <router-link v-if="!user" class="link" to="#"
               ><i class="fa-solid fa-right-to-bracket fa-lg q-px-sm"></i>Login In /
               Register</router-link
             >
@@ -55,11 +55,21 @@
 </template>
 
 <script>
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
 export default {
   name: 'MainFooter',
-  data() {
+  setup() {
+    const author = ref('Jerald Bianan');
+    const store = useStore();
+
+    const user = computed(() => {
+      return store.state.user;
+    });
+
     return {
-      author: 'Jerald Bianan',
+      author,
+      user,
     };
   },
 };
