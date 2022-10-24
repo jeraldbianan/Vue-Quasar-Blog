@@ -178,6 +178,12 @@ footer {
             font-weight: 500;
             color: #fff;
             text-decoration: none;
+            transition: 0.5s ease all;
+
+            &:hover {
+              transform: scale(1.1);
+              color: #1eb8b8;
+            }
           }
         }
       }

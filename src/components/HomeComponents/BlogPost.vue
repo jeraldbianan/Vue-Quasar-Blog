@@ -12,7 +12,7 @@
           v-if="post.welcomeScreen"
           color="dark"
           push
-          @click="$router.replace('#')"
+          to="/LoginPage"
           icon-right="fa-solid fa-arrow-right"
         >
           <span class="q-px-md">Login/Register</span>

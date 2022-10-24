@@ -50,13 +50,23 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 export default {
   name: 'blogCard',
   props: ['post'],
-  computed: {
-    editPost() {
-      return this.$store.state.editPost;
-    },
+
+  setup() {
+    const store = useStore();
+
+    const editPost = computed(() => {
+      return store.state.editPost;
+    });
+
+    return {
+      editPost,
+      store,
+    };
   },
 };
 </script>

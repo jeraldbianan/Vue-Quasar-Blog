@@ -71,7 +71,7 @@
         </q-btn-dropdown>
       </div>
       <q-btn
-        @click="toggleMobileNav"
+        @click="toggleLeftDrawer"
         class="menu-icon"
         v-show="mobile"
         flat
@@ -81,8 +81,15 @@
         aria-label="Menu"
         color="dark"
       />
-      <transition name="mobile-nav">
-        <ul class="mobile-nav" v-show="mobileNav">
+
+      <q-drawer
+        behavior="mobile"
+        show-if-above
+        v-model="leftDrawerOpen"
+        side="left"
+        bordered
+      >
+        <ul class="mobile-nav" v-if="leftDrawerOpen">
           <router-link class="link" :to="{ name: 'Home' }"
             ><i class="fa-solid fa-house fa-lg q-px-sm"></i>Home</router-link
           >
@@ -100,7 +107,7 @@
             Register</router-link
           >
         </ul>
-      </transition>
+      </q-drawer>
     </nav>
   </q-header>
 </template>
@@ -117,11 +124,11 @@ export default {
 
   setup() {
     const mobile = ref(null);
-    const mobileNav = ref(null);
     const windowWidth = ref(null);
     const store = useStore();
     const profileMenu = ref(null);
     const profile = ref(null);
+    const leftDrawerOpen = ref(false);
 
     watchEffect(() => {
       window.addEventListener('resize', checkSCreen);
@@ -130,7 +137,6 @@ export default {
         mobile.value = true;
       } else {
         mobile.value = false;
-        mobileNav.value = false;
       }
     });
 
@@ -140,12 +146,7 @@ export default {
         mobile.value = true;
       } else {
         mobile.value = false;
-        mobileNav.value = false;
       }
-    }
-
-    function toggleMobileNav() {
-      mobileNav.value = !mobileNav.value;
     }
 
     function signOut() {
@@ -159,14 +160,16 @@ export default {
 
     return {
       mobile,
-      mobileNav,
-      toggleMobileNav,
       checkSCreen,
       store,
       profileMenu,
       profile,
       signOut,
       user,
+      leftDrawerOpen,
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
     };
   },
 };
@@ -283,8 +286,7 @@ export default {
 
   .mobile-nav {
     padding: 20px;
-    width: 70%;
-    max-width: 250px;
+    width: 105%;
     display: flex;
     flex-direction: column;
     position: fixed;

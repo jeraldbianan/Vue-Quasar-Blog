@@ -18,27 +18,39 @@
 </template>
 
 <script>
+import { computed, onBeforeUnmount } from 'vue';
+import { useStore } from 'vuex';
 import BlogCard from '../components/HomeComponents/BlogCard.vue';
 export default {
   name: 'blogsView',
   components: {
     BlogCard,
   },
-  computed: {
-    sampleBlogCards() {
-      return this.$store.state.sampleBlogCards;
-    },
-    editPost: {
+
+  setup() {
+    const store = useStore();
+
+    const sampleBlogCards = computed(() => {
+      return store.state.sampleBlogCards;
+    });
+
+    const editPost = computed({
       get() {
-        return this.$store.state.editPost;
+        return store.state.editPost;
       },
       set(payload) {
-        this.$store.commit('toggleEditPost', payload);
+        store.commit('toggleEditPost', payload);
       },
-    },
-  },
-  beforeUnmount() {
-    this.$store.commit('toggleEditPost', false);
+    });
+
+    onBeforeUnmount(() => {
+      store.commit('toggleEditPost', false);
+    });
+
+    return {
+      sampleBlogCards,
+      editPost,
+    };
   },
 };
 </script>

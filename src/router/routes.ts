@@ -30,15 +30,24 @@ const routes: RouteRecordRaw[] = [
         name: 'ForgotPasswordPage',
         component: () => import('src/pages/ForgotPasswordPage.vue'),
       },
+      {
+        path: '/AdminView',
+        name: 'AdminView',
+        component: () => import('src/pages/AdminView.vue'),
+      },
+      {
+        path: '/ProfileView',
+        name: 'ProfileView',
+        component: () => import('src/pages/ProfileView.vue'),
+      },
+      {
+        path: '/:catchAll(.*)*',
+        component: () => import('pages/ErrorNotFound.vue'),
+      },
     ],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
-  },
+
 ];
 
 export default routes;
