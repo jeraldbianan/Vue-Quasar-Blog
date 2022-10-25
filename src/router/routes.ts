@@ -11,9 +11,9 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/pages/HomePage.vue'),
       },
       {
-        path: '/BlogsView',
-        name: 'BlogsView',
-        component: () => import('src/pages/BlogsView.vue'),
+        path: '/BlogsPage',
+        name: 'BlogsPage',
+        component: () => import('src/pages/BlogsPage.vue'),
       },
       {
         path: '/LoginPage',
@@ -31,18 +31,18 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/pages/ForgotPasswordPage.vue'),
       },
       {
-        path: '/AdminView',
-        name: 'AdminView',
-        component: () => import('src/pages/AdminView.vue'),
+        path: '/AdminPage',
+        name: 'AdminPage',
+        component: () => import('src/pages/AdminPage.vue'),
       },
       {
-        path: '/ProfileView',
-        name: 'ProfileView',
-        component: () => import('src/pages/ProfileView.vue'),
+        path: '/ProfilePage',
+        name: 'ProfilePage',
+        component: () => import('src/pages/ProfilePage.vue'),
       },
       {
         path: '/:catchAll(.*)*',
-        component: () => import('pages/ErrorNotFound.vue'),
+        component: () => import('src/pages/Error404Page.vue'),
       },
     ],
   },

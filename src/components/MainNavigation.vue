@@ -14,7 +14,7 @@
           <router-link class="link" to="#"
             ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
           >
-          <router-link class="link" :to="{ name: 'BlogsView' }"
+          <router-link class="link" :to="{ name: 'BlogsPage' }"
             ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
           >
           <router-link class="link" to="#"
@@ -31,13 +31,13 @@
               <div class="text-h6 q-mb-md">Account Settings</div>
 
               <div class="option">
-                <router-link class="option" to="#">
+                <router-link class="option" :to="{ name: 'ProfilePage' }">
                   <i class="fa-solid fa-user fa-2x"></i>
                   <p>Profile</p>
                 </router-link>
               </div>
               <div class="option">
-                <router-link class="option" to="#">
+                <router-link class="option" to="AdminPage">
                   <i class="fa-solid fa-lock fa-2x"></i>
                   <p>Admin</p>
                 </router-link>
@@ -96,7 +96,7 @@
           <router-link class="link" to="#"
             ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
           >
-          <router-link class="link" :to="{ name: 'BlogsView' }"
+          <router-link class="link" :to="{ name: 'BlogsPage' }"
             ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
           >
           <router-link class="link" to="#"
@@ -322,6 +322,10 @@ export default {
     font-size: 14px;
     margin-left: 12px;
     align-items: center;
+
+    &:hover {
+      color: #1eb8b8;
+    }
   }
 }
 </style>

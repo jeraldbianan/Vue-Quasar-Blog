@@ -32,7 +32,7 @@
             <router-link class="link" to="#"
               ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
             >
-            <router-link class="link" :to="{ name: 'BlogsView' }"
+            <router-link class="link" :to="{ name: 'BlogsPage' }"
               ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
             >
             <router-link class="link" to="#"
@@ -155,6 +155,11 @@ footer {
           li {
             display: flex;
             align-items: center;
+            transition: 0.5s ease;
+
+            &:hover {
+              transform: scale(1.2);
+            }
             .svg-icon {
               width: 30px;
               height: auto;
