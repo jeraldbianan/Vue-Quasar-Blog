@@ -1,6 +1,6 @@
 <template>
   <q-page-container>
-    <div></div>
+    <div class="create-post"></div>
   </q-page-container>
 </template>
 
