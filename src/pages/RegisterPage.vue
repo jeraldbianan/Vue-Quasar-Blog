@@ -200,7 +200,7 @@ export default {
             username: username.value,
             email: email.value,
           });
-          router.push({ name: 'LoginPage' });
+          router.push({ name: 'Home' });
           return setTimeout(() => {
             $q.loading.show({
               spinner: QSpinnerGears,

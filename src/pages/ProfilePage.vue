@@ -31,6 +31,36 @@
             text-color="white"
             label="Save Changes"
           />
+
+          <q-dialog v-model="modalSuccess">
+            <q-card style="width: 300px">
+              <q-card-section>
+                <div class="text-h6">Account Settings</div>
+              </q-card-section>
+
+              <q-card-section class="q-pt-none"> Changes were saved </q-card-section>
+
+              <q-card-actions align="right" class="bg-white text-teal">
+                <q-btn flat label="OK" v-close-popup />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
+
+          <q-dialog v-model="modalFailed">
+            <q-card style="width: 300px">
+              <q-card-section>
+                <div class="text-h6">Account Settings</div>
+              </q-card-section>
+
+              <q-card-section class="q-pt-none">
+                <div v-if="error" class="error q-mt-md">{{ errorMsg }}</div>
+              </q-card-section>
+
+              <q-card-actions align="right" class="bg-white text-teal">
+                <q-btn flat label="OK" v-close-popup />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </div>
       </div>
     </div>
@@ -38,15 +68,20 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
-import { useQuasar, QSpinnerGears } from 'quasar';
+import { useQuasar } from 'quasar';
 import { onBeforeUnmount } from 'vue';
 export default {
+  name: 'ProfilePage',
   setup() {
     const $q = useQuasar();
     let timer;
     const store = useStore();
+    const error = ref(null);
+    const errorMsg = ref('');
+    const modalSuccess = ref(null);
+    const modalFailed = ref(null);
 
     onBeforeUnmount(() => {
       if (timer !== void 0) {
@@ -87,24 +122,26 @@ export default {
     });
 
     function updateProfile() {
-      $q.loading.show({
-        message: 'Processing Changes',
-      });
+      $q.loading.show();
 
-      store.dispatch('updateUserSettings');
-      return (timer = setTimeout(() => {
-        $q.loading.show({
-          spinner: QSpinnerGears,
-          spinnerColor: 'blue',
-          messageColor: 'white',
-          message: 'Changes updated Successfully',
-        });
+      timer = setTimeout(() => {
+        $q.loading.hide();
+        timer = void 0;
+      }, 500);
 
-        timer = setTimeout(() => {
-          $q.loading.hide();
-          timer = void 0;
-        }, 2000);
-      }, 2000));
+      if (firstName.value !== '' && lastName.value !== '' && username.value !== '') {
+        error.value = false;
+        errorMsg.value = '';
+        modalSuccess.value = true;
+        modalFailed.value = false;
+
+        store.dispatch('updateUserSettings');
+      } else {
+        error.value = true;
+        errorMsg.value = 'Please Fill Out all Fields';
+        modalSuccess.value = false;
+        modalFailed.value = true;
+      }
     }
 
     return {
@@ -114,6 +151,10 @@ export default {
       username,
       email,
       updateProfile,
+      error,
+      errorMsg,
+      modalSuccess,
+      modalFailed,
     };
   },
 };

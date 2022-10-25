@@ -2,7 +2,7 @@
 
 
 # Frameworks/Tools I used
-- VUE3(Composition API) + Quasar + Vuex + Firebase(Auth and Firestore)
+- VUE3(Composition API) + Quasar + Vuex + Firebase(Auth and Firestore) + Quill
 
 # What to do before use
 - yarn install

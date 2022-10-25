@@ -17,7 +17,7 @@
           <router-link class="link" :to="{ name: 'BlogsPage' }"
             ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
           >
-          <router-link class="link" to="#"
+          <router-link v-if="user" class="link" :to="{ name: 'CreatePostPage' }"
             ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create Post</router-link
           >
           <router-link v-if="!user" class="link" :to="{ name: 'LoginPage' }"
@@ -25,18 +25,19 @@
             Register</router-link
           >
         </ul>
+
         <q-btn-dropdown v-if="user" class="profile" color="dark">
           <div class="row no-wrap q-pa-md">
             <div class="column">
               <div class="text-h6 q-mb-md">Account Settings</div>
 
-              <div class="option">
+              <div v-if="user" class="option">
                 <router-link class="option" :to="{ name: 'ProfilePage' }">
                   <i class="fa-solid fa-user fa-2x"></i>
                   <p>Profile</p>
                 </router-link>
               </div>
-              <div class="option">
+              <div v-if="!user" class="option">
                 <router-link class="option" to="AdminPage">
                   <i class="fa-solid fa-lock fa-2x"></i>
                   <p>Admin</p>
@@ -81,7 +82,6 @@
         aria-label="Menu"
         color="dark"
       />
-
       <q-drawer
         behavior="mobile"
         show-if-above
@@ -99,7 +99,7 @@
           <router-link class="link" :to="{ name: 'BlogsPage' }"
             ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
           >
-          <router-link class="link" to="#"
+          <router-link v-if="user" class="link" :to="{ name: 'CreatePostPage' }"
             ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create Post</router-link
           >
           <router-link v-if="!user" class="link" :to="{ name: 'LoginPage' }"

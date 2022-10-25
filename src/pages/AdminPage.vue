@@ -1,13 +1,98 @@
 <template>
-  <div></div>
+  <q-page-container>
+    <div class="admin">
+      <div class="container">
+        <h2>Administration</h2>
+        <div class="admin-info">
+          <span>Add Admin</span>
+          <div class="input">
+            <q-input
+              v-model="adminEmail"
+              label="Enter the Email Address of the user you want to make an admin"
+            />
+          </div>
+          <q-btn
+            @click="updateProfile"
+            color="dark"
+            text-color="white"
+            label="Save Changes"
+          />
+        </div>
+      </div>
+    </div>
+  </q-page-container>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
+  name: 'AdminPage',
+
   setup() {
-    return {};
+    const adminemail = ref();
+    const functionMsg = ref(null);
+
+    return {
+      adminemail,
+      functionMsg,
+    };
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.admin {
+  .container {
+    max-width: 1000px;
+    padding: 60px 25px;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 16px;
+      font-weight: 300;
+      font-size: 32px;
+    }
+
+    .admin-info {
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.6);
+      padding: 32px;
+      background-color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      margin: 32px auto;
+
+      span {
+        font-size: 14px;
+        align-self: center;
+      }
+
+      .input {
+        margin: 16px 0;
+
+        label {
+          font-size: 14px;
+          display: block;
+          padding-bottom: 6px;
+        }
+
+        input {
+          width: 100%;
+          border: none;
+          background-color: #f2f7f6;
+          padding: 8px;
+          height: 50px;
+          @media (min-width: 900px) {
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

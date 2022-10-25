@@ -35,7 +35,7 @@
             <router-link class="link" :to="{ name: 'BlogsPage' }"
               ><i class="fa-solid fa-blog fa-lg q-px-sm"></i>Blogs</router-link
             >
-            <router-link class="link" to="#"
+            <router-link v-if="user" class="link" :to="{ name: 'CreatePostPage' }"
               ><i class="fa-solid fa-circle-plus fa-lg q-px-sm"></i>Create
               Post</router-link
             >

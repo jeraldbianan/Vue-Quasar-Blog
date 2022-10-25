@@ -41,6 +41,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/pages/ProfilePage.vue'),
       },
       {
+      path: '/CreatePostPage',
+      name: 'CreatePostPage',
+      component: () => import('src/pages/CreatePostPage.vue'),
+      },
+      {
         path: '/:catchAll(.*)*',
         component: () => import('src/pages/Error404Page.vue'),
       },
