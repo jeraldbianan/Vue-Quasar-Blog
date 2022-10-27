@@ -16,12 +16,23 @@
           <h2>Login to JB Blogs</h2>
           <div class="inputs">
             <div class="input">
-              <q-input standout filled v-model="email" label="Email">
+              <q-input
+                standout
+                filled
+                v-model="email"
+                label="Email"
+                hint="test@gmail.com"
+              >
                 <template v-slot:prepend><q-icon name="mail" /></template
               ></q-input>
             </div>
             <div class="input">
-              <q-input v-model="password" filled type="password" label="Password"
+              <q-input
+                v-model="password"
+                filled
+                type="password"
+                label="Password"
+                hint="123qwe"
                 ><template v-slot:prepend><q-icon name="fa-solid fa-lock" /></template
               ></q-input>
             </div>

@@ -1,10 +1,10 @@
 # JBBLogs - My very own sample Blog
 
-URL: https://jb-blogs.netlify.app/
+- URL: https://jb-blogs.netlify.app/
 
 In order to login:
-Username: test@gmail.com
-Password: 123qwe
+- Username: test@gmail.com
+- Password: 123qwe
 
 
 # Frameworks/Tools I used
