@@ -6,6 +6,8 @@ import {
   createWebHistory,
 } from 'vue-router';
 import routes from './routes';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 /*
  * If not building with SSR mode, you can
@@ -36,6 +38,29 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach((to, from, next) => {
     document.title = `${to.meta.title} | JB BLog`
     next()
+  })
+
+  Router.beforeEach(async (to, from, next) => {
+    const user = firebase.auth().currentUser
+    let admin = null
+
+    if (user) {
+      const token = await user.getIdTokenResult()
+      admin = token.claims.admin
+    }
+    if(to.matched.some((res) => res.meta.requiresAuth)) {
+        if(user) {
+          if(to.matched.some((res) => res.meta.requiresAdmin)) {
+            if(admin) {
+              return next()
+            }
+            return next({name: 'Home'});
+          }
+          return next()
+        }
+        return next({name: 'Home'});
+      }
+      return next();
   })
 
   return Router;

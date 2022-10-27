@@ -16,7 +16,7 @@
         leave-active-class="animated fadeOut slow"
       >
         <div class="icons" v-show="editPost">
-          <div class="icon" name="icons">
+          <div @click="editBlog" class="icon" name="icons">
             <q-btn
               class="edit"
               flat
@@ -57,12 +57,14 @@
 <script>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 export default {
   name: 'blogCard',
   props: ['post'],
 
   setup(props) {
     const store = useStore();
+    const router = useRouter();
 
     const editPost = computed(() => {
       return store.state.editPost;
@@ -72,10 +74,16 @@ export default {
       store.dispatch('deletePost', props.post.blogID);
     }
 
+    function editBlog() {
+      router.push({ name: 'EditBlogPage', params: { blogid: props.post.blogID } });
+    }
+
     return {
       editPost,
       store,
       deletePost,
+      editBlog,
+      router,
     };
   },
 };

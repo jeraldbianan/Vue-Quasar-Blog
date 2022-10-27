@@ -80,7 +80,13 @@ export default createStore({
     },
     filterBlogPost(state, blogId) {
       state.blogPosts = state.blogPosts.filter(post => post.blogID !== blogId)
-    }
+    },
+    setBlogState(state, payload) {
+      state.blogTitle = payload.blogTitle;
+      state.blogHTML = payload.blogHTML;
+      state.blogPhotoFileURL = payload.blogCoverPhoto;
+      state.blogPhotoName = payload.blogCoverPhotoName;
+    },
   },
   actions: {
     async getCurrentUser({commit}) {
@@ -111,6 +117,7 @@ export default createStore({
             blogCoverPhoto: doc.data().blogCoverPhoto,
             blogTitle: doc.data().blogTitle,
             blogDate: doc.data().date,
+            blogCoverPhotoName: doc.data().blogCoverPhotoName
           }
           state.blogPosts.push(data)
         }
@@ -123,6 +130,11 @@ export default createStore({
       await getPost.delete();
 
       commit('filterBlogPost', blogId)
+    },
+    async updatePost({commit, dispatch}, routeID) {
+      commit('filterBlogPost', routeID)
+
+      await dispatch('getPost')
     }
   },
   modules: {
