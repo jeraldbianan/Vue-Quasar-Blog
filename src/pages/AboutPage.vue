@@ -175,6 +175,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+    margin-bottom: 30px;
 
     @media (max-width: 700px) {
       flex-direction: column;
