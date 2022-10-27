@@ -2,8 +2,8 @@
   <q-header class="main-header">
     <nav @click="hideOnClick" class="container">
       <div class="branding">
-        <router-link class="header" :to="{ name: 'Home' }"
-          >JB <span class="header-span">BLOGS</span></router-link
+        <router-link class="header" :to="{ name: 'Home' }">
+          <span class="header-span">JB BLOGS</span></router-link
         >
       </div>
       <div class="nav-links">
