@@ -10,7 +10,7 @@
           enter-active-class="animated fadeIn slow"
           leave-active-class="animated fadeOut slow"
         >
-          <BlogCard v-for="(post, index) in sampleBlogCards" :key="index" :post="post" />
+          <BlogCard v-for="(post, index) in blogPosts" :key="index" :post="post" />
         </transition-group>
       </div>
     </div>
@@ -30,8 +30,8 @@ export default {
   setup() {
     const store = useStore();
 
-    const sampleBlogCards = computed(() => {
-      return store.state.sampleBlogCards;
+    const blogPosts = computed(() => {
+      return store.state.blogPosts;
     });
 
     const editPost = computed({
@@ -48,7 +48,7 @@ export default {
     });
 
     return {
-      sampleBlogCards,
+      blogPosts,
       editPost,
     };
   },

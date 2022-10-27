@@ -5,29 +5,9 @@ import db from '../firebase/firebaseInit';
 
 export default createStore({
   state: {
-    sampleBlogCards: [
-      {
-        blogTitle: 'Mountain View',
-        blogCoverPhoto: 'stock-1',
-        blogDate: 'June 7, 2022',
-      },
-      {
-        blogTitle: 'Dark Woods',
-        blogCoverPhoto: 'stock-2',
-        blogDate: 'June 15, 2022',
-      },
-      {
-        blogTitle: 'Sunrise in the Forest',
-        blogCoverPhoto: 'stock-3',
-        blogDate: 'July 4, 2022',
-      },
-      {
-        blogTitle: 'Surfing the Waves',
-        blogCoverPhoto: 'stock-4',
-        blogDate: 'August 1, 2022',
-      },
-    ],
-    blogHTML: 'Write your blog title here',
+    blogPosts: [],
+    postLoaded: null,
+    blogHTML: '',
     blogTitle: '',
     blogPhotoName: '',
     blogPhotoFileURL: null,
@@ -42,6 +22,12 @@ export default createStore({
     profileInitials: null,
   },
   getters: {
+    blogPostsFeed(state) {
+      return state.blogPosts.slice(0, 2)
+    },
+    blogPostsCards(state) {
+      return state.blogPosts.slice(2, 6)
+    }
   },
   mutations: {
     toggleEditPost(state, payload) {
@@ -70,6 +56,21 @@ export default createStore({
     },
     changeUserName(state, payload) {
       state.profileUserName = payload
+    },
+    newBlogPost(state, payload) {
+      state.blogHTML = payload
+    },
+    updateBlogTitle(state, payload) {
+      state.blogTitle = payload
+    },
+    fileNameChange(state, payload) {
+      state.blogPhotoName = payload
+    },
+    createFileURL(state, payload) {
+      state.blogPhotoFileURL = payload
+    },
+    filterBlogPost(state, payload) {
+      state.blogPosts = state.blogPosts.filter(post => post.blogID !== payload)
     }
   },
   actions: {
@@ -79,7 +80,7 @@ export default createStore({
 
       commit('setProfileInfo', dbResults)
       commit('setProfileInitials')
-      console.log(dbResults)
+      //console.log(dbResults)
     },
     async updateUserSettings({commit, state}) {
       const dataBase = await db.collection('users').doc(state.profileId)
@@ -89,6 +90,30 @@ export default createStore({
         username: state.profileUserName,
       })
       commit('setProfileInitials')
+    },
+    async getPost({state}) {
+      const dataBase = await db.collection('blogPost').orderBy('date', 'desc')
+      const dbResults = await dataBase.get()
+      dbResults.forEach((doc) => {
+        if (!state.blogPosts.some(post => post.blogID === doc.id)) {
+          const data = {
+            blogID: doc.data().blogID,
+            blogHTML: doc.data().blogHTML,
+            blogCoverPhoto: doc.data().blogCoverPhoto,
+            blogTitle: doc.data().blogTitle,
+            blogDate: doc.data().date,
+          }
+          state.blogPosts.push(data)
+        }
+      })
+      state.postLoaded = true
+      //console.log(state.blogPosts)
+    },
+    async deletePost({commit}, payload) {
+      const getPost = await db.collection('blogPost').doc(payload)
+      await getPost.delete();
+
+      commit('filterBlogPost', payload)
     }
   },
   modules: {

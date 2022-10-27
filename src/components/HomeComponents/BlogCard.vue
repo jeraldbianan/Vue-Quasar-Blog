@@ -1,10 +1,13 @@
 <template>
   <q-card class="blog-card">
-    <img :src="require(`../../assets/blogCards/${post.blogCoverPhoto}.jpg`)" alt="" />
+    <img :src="post.blogCoverPhoto" alt="" />
     <div class="info q-pb-md">
       <q-card-section>
         <h4>{{ post.blogTitle }}</h4>
-        <h6 class="q-py-sm">Posted on: {{ post.blogDate }}</h6>
+        <h6 class="q-py-sm">
+          Posted on:
+          {{ new Date(post.blogDate).toLocaleString('en-us', { dateStyle: 'long' }) }}
+        </h6>
       </q-card-section>
 
       <transition
@@ -23,7 +26,7 @@
               aria-label="Menu"
             />
           </div>
-          <div class="icon" name="icons">
+          <div @click="deletePost" class="icon" name="icons">
             <q-btn
               class="delete fa-2x"
               flat
@@ -40,7 +43,9 @@
         class="link q-py-sm"
         color="dark"
         push
-        @click="$router.replace('#')"
+        @click="
+          $router.replace({ name: 'ViewBlogPage', params: { blogid: post.blogID } })
+        "
         icon-right="fa-solid fa-arrow-right"
       >
         <span class="q-px-md">View the Post</span>
@@ -56,16 +61,21 @@ export default {
   name: 'blogCard',
   props: ['post'],
 
-  setup() {
+  setup(props) {
     const store = useStore();
 
     const editPost = computed(() => {
       return store.state.editPost;
     });
 
+    function deletePost() {
+      store.dispatch('deletePost', props.post.blogID);
+    }
+
     return {
       editPost,
       store,
+      deletePost,
     };
   },
 };

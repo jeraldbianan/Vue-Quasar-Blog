@@ -7,7 +7,7 @@
     <q-page-container>
       <div class="home">
         <BlogPost v-if="!user" :post="welcomeScreen" />
-        <BlogPost v-for="(post, index) in sampleBlogPost" :key="index" :post="post" />
+        <BlogPost v-for="(post, index) in blogPostsFeed" :key="index" :post="post" />
         <transition
           appear
           enter-active-class="animated fadeIn slow"
@@ -18,7 +18,7 @@
               <h3>View More Recent Blogs</h3>
               <div class="blog-cards">
                 <BlogCard
-                  v-for="(post, index) in sampleBlogCards"
+                  v-for="(post, index) in blogPostsCards"
                   :key="index"
                   :post="post"
                 />
@@ -56,10 +56,20 @@ export default {
       return store.state.user;
     });
 
+    const blogPostsCards = computed(() => {
+      return store.getters.blogPostsCards;
+    });
+
+    const blogPostsFeed = computed(() => {
+      return store.getters.blogPostsFeed;
+    });
+
     return {
       user,
       sampleBlogCards,
       ...DummyData,
+      blogPostsCards,
+      blogPostsFeed,
     };
   },
 };

@@ -117,6 +117,7 @@ import { computed, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'MainNavigation',
@@ -129,6 +130,7 @@ export default {
     const profileMenu = ref(null);
     const profile = ref(null);
     const leftDrawerOpen = ref(false);
+    const router = useRouter();
 
     watchEffect(() => {
       window.addEventListener('resize', checkSCreen);
@@ -151,7 +153,7 @@ export default {
 
     function signOut() {
       firebase.auth().signOut();
-      window.location.reload();
+      router.push({ name: 'Home' });
     }
 
     const user = computed(() => {
