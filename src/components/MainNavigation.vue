@@ -3,7 +3,7 @@
     <nav @click="hideOnClick" class="container">
       <div class="branding">
         <router-link class="header" :to="{ name: 'Home' }">
-          <span class="header-span">JB BLOGS</span></router-link
+          JB<span class="header-span"> BLOGS</span></router-link
         >
       </div>
       <div class="nav-links">
@@ -230,7 +230,7 @@ export default {
       align-items: center;
 
       .header {
-        font-family: 'Proxima Nova';
+        font-family: 'Comfortaa', Courier, monospace;
         font-weight: 600;
         font-size: 35px;
         color: #000;

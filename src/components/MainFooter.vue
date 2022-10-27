@@ -107,7 +107,7 @@ footer {
       }
 
       .header {
-        font-family: 'Proxima Nova';
+        font-family: 'Comfortaa', Courier, monospace;
         text-align: center;
         font-size: 35px;
         color: #fff;
