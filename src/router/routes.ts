@@ -106,6 +106,15 @@ const routes: RouteRecordRaw[] = [
           requiresAuth: true
         }
       },
+      {
+        path: '/AboutPage',
+        name: 'AboutPage',
+        component: () => import('src/pages/AboutPage.vue'),
+        meta: {
+          title: 'AboutPage',
+          requiresAuth: false
+        }
+      },
 
       {
         path: '/:catchAll(.*)*',
