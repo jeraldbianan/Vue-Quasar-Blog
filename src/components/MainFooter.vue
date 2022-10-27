@@ -29,7 +29,7 @@
             <router-link class="link" :to="{ name: 'Home' }"
               ><i class="fa-solid fa-house fa-lg q-px-sm"></i>Home</router-link
             >
-            <router-link class="link" to="#"
+            <router-link class="link" :to="{ name: 'AboutPage' }"
               ><i class="fa-solid fa-address-card fa-lg q-px-sm"></i>About</router-link
             >
             <router-link class="link" :to="{ name: 'BlogsPage' }"
