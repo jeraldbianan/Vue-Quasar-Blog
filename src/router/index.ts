@@ -63,5 +63,6 @@ export default route(function (/* { store, ssrContext } */) {
       return next();
   })
 
+
   return Router;
 });
