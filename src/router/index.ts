@@ -33,5 +33,10 @@ export default route(function (/* { store, ssrContext } */) {
     ),
   });
 
+  Router.beforeEach((to, from, next) => {
+    document.title = `${to.meta.title} | JB BLog`
+    next()
+  })
+
   return Router;
 });
