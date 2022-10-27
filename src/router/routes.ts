@@ -11,7 +11,8 @@ const routes: RouteRecordRaw[] = [
         name: 'Home',
         component: () => import('src/pages/HomePage.vue'),
         meta: {
-          title: 'Home'
+          title: 'Home',
+          requiresAuth: false
         }
       },
       {
@@ -19,7 +20,8 @@ const routes: RouteRecordRaw[] = [
         name: 'BlogsPage',
         component: () => import('src/pages/BlogsPage.vue'),
         meta: {
-          title: 'BlogsPage'
+          title: 'BlogsPage',
+          requiresAuth: false
         }
       },
       {
@@ -27,7 +29,8 @@ const routes: RouteRecordRaw[] = [
         name: 'LoginPage',
         component: () => import('src/pages/LoginPage.vue'),
         meta: {
-          title: 'LoginPage'
+          title: 'LoginPage',
+          requiresAuth: false
         }
       },
       {
@@ -35,7 +38,8 @@ const routes: RouteRecordRaw[] = [
         name: 'RegisterPage',
         component: () => import('src/pages/RegisterPage.vue'),
         meta: {
-          title: 'RegisterPage'
+          title: 'RegisterPage',
+          requiresAuth: false
         }
       },
       {
@@ -43,7 +47,8 @@ const routes: RouteRecordRaw[] = [
         name: 'ForgotPasswordPage',
         component: () => import('src/pages/ForgotPasswordPage.vue'),
         meta: {
-          title: 'ForgotPasswordPage'
+          title: 'ForgotPasswordPage',
+          requiresAuth: false
         }
       },
       {
@@ -51,7 +56,9 @@ const routes: RouteRecordRaw[] = [
         name: 'AdminPage',
         component: () => import('src/pages/AdminPage.vue'),
         meta: {
-          title: 'AdminPage'
+          title: 'AdminPage',
+          requiresAuth: true,
+          requiresAdmin: true
         }
       },
       {
@@ -59,7 +66,8 @@ const routes: RouteRecordRaw[] = [
         name: 'ProfilePage',
         component: () => import('src/pages/ProfilePage.vue'),
         meta: {
-          title: 'ProfilePage'
+          title: 'ProfilePage',
+          requiresAuth: true
         }
       },
       {
@@ -67,7 +75,8 @@ const routes: RouteRecordRaw[] = [
       name: 'CreatePostPage',
       component: () => import('src/pages/CreatePostPage.vue'),
       meta: {
-        title: 'CreatePostPage'
+        title: 'CreatePostPage',
+        requiresAuth: true
       }
       },
       {
@@ -75,7 +84,8 @@ const routes: RouteRecordRaw[] = [
         name: 'BlogPreview',
         component: () => import('src/pages/BlogPreview.vue'),
         meta: {
-          title: 'BlogPreview'
+          title: 'BlogPreview',
+          requiresAuth: true
         }
       },
       {
@@ -83,7 +93,8 @@ const routes: RouteRecordRaw[] = [
         name: 'ViewBlogPage',
         component: () => import('src/pages/ViewBlogPage.vue'),
         meta: {
-          title: 'ViewBlogPage'
+          title: 'ViewBlogPage',
+          requiresAuth: false
         }
       },
       {
@@ -91,7 +102,8 @@ const routes: RouteRecordRaw[] = [
         name: 'EditBlogPage',
         component: () => import('src/pages/EditBlogPage.vue'),
         meta: {
-          title: 'EditBlogPage'
+          title: 'EditBlogPage',
+          requiresAuth: true
         }
       },
 
