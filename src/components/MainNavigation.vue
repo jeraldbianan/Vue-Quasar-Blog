@@ -73,7 +73,7 @@
       </div>
       <q-btn
         @click="toggleLeftDrawer"
-        class="menu-icon"
+        class="menu-icon q-mr-md"
         v-show="mobile"
         flat
         dense
@@ -268,8 +268,8 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
         color: #fff;
         background-color: #303030;

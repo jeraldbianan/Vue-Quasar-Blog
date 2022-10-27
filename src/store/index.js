@@ -25,9 +25,18 @@ export default createStore({
     blogPostsFeed(state) {
       return state.blogPosts.slice(0, 2)
     },
+
+    //map example, added 'Evan' in the Title
+    // blogPostsFeed(state) {
+    //   return state.blogPosts.slice(0, 2).map((i) => {
+    //     const blog = i
+    //     blog.blogTitle = blog.blogTitle + 'Evan'
+    //     return blog
+    //   })
+    // },
     blogPostsCards(state) {
       return state.blogPosts.slice(2, 6)
-    }
+    },
   },
   mutations: {
     toggleEditPost(state, payload) {
@@ -69,8 +78,8 @@ export default createStore({
     createFileURL(state, payload) {
       state.blogPhotoFileURL = payload
     },
-    filterBlogPost(state, payload) {
-      state.blogPosts = state.blogPosts.filter(post => post.blogID !== payload)
+    filterBlogPost(state, blogId) {
+      state.blogPosts = state.blogPosts.filter(post => post.blogID !== blogId)
     }
   },
   actions: {
@@ -109,11 +118,11 @@ export default createStore({
       state.postLoaded = true
       //console.log(state.blogPosts)
     },
-    async deletePost({commit}, payload) {
-      const getPost = await db.collection('blogPost').doc(payload)
+    async deletePost({commit}, blogId) {
+      const getPost = await db.collection('blogPost').doc(blogId)
       await getPost.delete();
 
-      commit('filterBlogPost', payload)
+      commit('filterBlogPost', blogId)
     }
   },
   modules: {

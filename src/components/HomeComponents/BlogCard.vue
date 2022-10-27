@@ -18,21 +18,21 @@
         <div class="icons" v-show="editPost">
           <div class="icon" name="icons">
             <q-btn
-              class="edit fa-2x"
+              class="edit"
               flat
               dense
               round
-              icon="fa-solid fa-pen-to-square"
+              icon="fa-solid fa-pen-to-square fa-xs"
               aria-label="Menu"
             />
           </div>
           <div @click="deletePost" class="icon" name="icons">
             <q-btn
-              class="delete fa-2x"
+              class="delete"
               flat
               dense
               round
-              icon="fa-solid fa-trash"
+              icon="fa-solid fa-trash "
               aria-label="Menu"
             />
           </div>
@@ -112,8 +112,6 @@ export default {
       border-radius: 50%;
       background-color: #fff;
       transition: 0.5s ease all;
-      width: 40px;
-      height: 40px;
 
       &:hover {
         background-color: #303030;

@@ -38,7 +38,6 @@
                 </q-card-section>
               </q-card>
             </q-dialog>
-
             <span>File Chosen: {{ store.state.blogPhotoName }}</span>
           </div>
         </div>

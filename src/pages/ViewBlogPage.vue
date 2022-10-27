@@ -7,17 +7,17 @@
     <q-page-container>
       <div class="post-view" v-if="currentBlog">
         <div class="container quillWrapper">
-          <h2>{{ blogTitle }}</h2>
+          <h2>{{ currentBlog.blogTitle }}</h2>
           <h4>
             Posted on:
             {{
-              new Date(blogDate).toLocaleString('en-us', {
+              new Date(currentBlog.blogDate).toLocaleString('en-us', {
                 dateStyle: 'long',
               })
             }}
           </h4>
-          <img :src="blogCoverPhoto" alt="" />
-          <div class="post-content ql-editor" v-html="blogHTML"></div>
+          <img :src="currentBlog.blogCoverPhoto" alt="" />
+          <div class="post-content ql-editor" v-html="currentBlog.blogHTML"></div>
         </div>
       </div>
     </q-page-container>
@@ -36,27 +36,25 @@ export default {
     const currentBlog = ref(null);
     const store = useStore();
     const route = useRoute();
-    const blogTitle = ref(null);
-    const blogDate = ref(null);
-    const blogCoverPhoto = ref(null);
-    const blogHTML = ref(null);
+    const r = [1, 2, 3, 4];
 
+    console.log(
+      r.map((i) => {
+        return i * 5;
+      })
+    );
+
+    //user .filter if you want to get more than 1 array
+    //i use .find since im only getting 1 array which is the current blog selected
     onMounted(async () => {
-      currentBlog.value = await store.state.blogPosts.filter((post) => {
+      currentBlog.value = await store.state.blogPosts.find((post) => {
         return post.blogID === route.params.blogid;
       });
-      blogTitle.value = currentBlog.value[[0]].blogTitle;
-      blogDate.value = currentBlog.value[[0]].blogDate;
-      blogCoverPhoto.value = currentBlog.value[[0]].blogCoverPhoto;
-      blogHTML.value = currentBlog.value[[0]].blogHTML;
+      console.log();
     });
 
     return {
       currentBlog,
-      blogTitle,
-      blogDate,
-      blogCoverPhoto,
-      blogHTML,
     };
   },
 };
