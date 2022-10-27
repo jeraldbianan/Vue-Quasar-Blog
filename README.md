@@ -1,5 +1,11 @@
 # JBBLogs - My very own sample Blog
 
+URL: https://jb-blogs.netlify.app/
+
+In order to login:
+Username: test@gmail.com
+Password: 123qwe
+
 
 # Frameworks/Tools I used
 - VUE3(Composition API) + Quasar + Vuex + Firebase(Auth and Firestore)
