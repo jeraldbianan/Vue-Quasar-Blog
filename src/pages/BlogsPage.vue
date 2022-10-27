@@ -2,7 +2,7 @@
   <q-page-container>
     <div class="blog-card-wrapper">
       <div class="blog-cards container">
-        <div class="toggle-edit">
+        <div class="toggle-edit" v-if="user">
           <q-toggle v-model="editPost" color="dark" label="Toggle Edit" left-label />
         </div>
         <transition-group
@@ -30,6 +30,10 @@ export default {
   setup() {
     const store = useStore();
 
+    const user = computed(() => {
+      return store.state.user;
+    });
+
     const blogPosts = computed(() => {
       return store.state.blogPosts;
     });
@@ -50,6 +54,7 @@ export default {
     return {
       blogPosts,
       editPost,
+      user,
     };
   },
 };

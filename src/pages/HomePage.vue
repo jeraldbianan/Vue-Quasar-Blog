@@ -15,7 +15,11 @@
         >
           <div class="blog-card-wrapper">
             <div class="container">
-              <h3>View More Recent Blogs</h3>
+              <h3>
+                <router-link class="blog-cards-link" :to="{ name: 'BlogsPage' }"
+                  >View More Recent Blogs</router-link
+                >
+              </h3>
               <div class="blog-cards">
                 <BlogCard
                   v-for="(post, index) in blogPostsCards"
@@ -77,6 +81,19 @@ export default {
 
 <style lang="scss" scoped>
 .blog-card-wrapper {
+  .container {
+    .blog-cards-link {
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+
+      &:hover {
+        color: #59f3f3;
+      }
+    }
+  }
+
   h3 {
     font-weight: 300;
     font-size: 28px;
