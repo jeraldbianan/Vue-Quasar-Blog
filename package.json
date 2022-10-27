@@ -37,6 +37,7 @@
     "quill-image-drop-module": "1.0.3",
     "quill-image-resize": "^3.0.9",
     "quill-image-resize-module": "^3.0.0",
+    "quill-image-resize-module-plus": "^1.0.2",
     "quill-image-uploader": "^1.2.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.5",

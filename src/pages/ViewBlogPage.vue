@@ -36,13 +36,14 @@ export default {
     const currentBlog = ref(null);
     const store = useStore();
     const route = useRoute();
-    const r = [1, 2, 3, 4];
 
-    console.log(
-      r.map((i) => {
-        return i * 5;
-      })
-    );
+    // const r = [1, 2, 3, 4];
+
+    // console.log(
+    //   r.map((i) => {
+    //     return i * 5;
+    //   })
+    // );
 
     //user .filter if you want to get more than 1 array
     //i use .find since im only getting 1 array which is the current blog selected
