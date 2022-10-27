@@ -43,13 +43,12 @@
         </div>
         <div class="editor">
           <QuillEditor
-            :options="editorSettings"
+            :options="options"
             v-model:content="blogHTML"
             contentType="html"
-            useCustomImageHandler
+            ImageResize
             @imageAdded="imageHandler"
             toolbar="full"
-            placeholder="Write Something..."
           />
         </div>
         <div class="blog-actions">
@@ -85,9 +84,10 @@ import { useStore } from 'vuex';
 
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
-
 import Quill from 'quill';
-import ImageResize from 'quill-image-resize';
+
+import ImageResize from 'quill-image-resize-module-plus';
+
 Quill.register('modules/imageResize', ImageResize);
 
 import firebase from 'firebase/compat/app';
@@ -102,12 +102,15 @@ export default {
   components: { QuillEditor },
   data() {
     return {
-      editorSettings: {
+      options: {
         modules: {
+          toolbar: ['bold', 'italic', 'underline'],
           imageResize: {
-            modules: ['Resize'],
+            modules: ['Resize', 'DisplaySize', 'Toolbar'],
           },
         },
+        placeholder: 'Write Something...',
+        theme: 'snow',
       },
     };
   },
