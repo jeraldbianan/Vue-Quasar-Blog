@@ -1,6 +1,7 @@
 # JBBLogs - My very own sample Blog
 
-<img width="1920" alt="image" src="https://github.com/user-attachments/assets/117d0918-95f3-4b39-896d-293f1175f413">
+![jbblogs-min](https://github.com/user-attachments/assets/9b2bb4e6-2bba-4819-a945-b40086ff0d2c)
+
 
 - URL: https://jb-blogs.netlify.app/
 
